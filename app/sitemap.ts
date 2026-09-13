@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { TOOL_REGISTRY } from "@/lib/registry";
 import { CATEGORIES } from "@/lib/registry/categories";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://kunalistic.io";
 

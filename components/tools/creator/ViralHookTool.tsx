@@ -16,15 +16,29 @@ export const ViralHookTool: React.FC = () => {
   const handleGenerate = async () => {
     setIsGenerating(true);
     try {
-      const res = await fetch("/api/ai/hooks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic, niche }),
-      });
-      const json = await res.json();
-      if (json.success && json.data) {
-        setHooks(json.data);
+      let generatedHooks: ViralHook[] | null = null;
+      try {
+        const res = await fetch("/api/ai/hooks", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ topic, niche }),
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && json.data) {
+            generatedHooks = json.data;
+          }
+        }
+      } catch {
+        // Fallback for static hosting
       }
+
+      if (!generatedHooks) {
+        const { generateLocalHooks } = await import("@/lib/ai/heuristics");
+        generatedHooks = generateLocalHooks(topic, niche);
+      }
+
+      setHooks(generatedHooks);
     } catch (err) {
       console.error(err);
     } finally {

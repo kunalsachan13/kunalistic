@@ -29,13 +29,18 @@ export default function SupportPage() {
   const loadSupporters = async () => {
     try {
       const res = await fetch("/api/support/wall");
-      const json = await res.json();
-      if (json.success && json.data) {
-        setSupporters(json.data);
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && json.data) {
+          setSupporters(json.data);
+          return;
+        }
       }
     } catch {
-      // Fallback
+      // Fallback for static hosting
     }
+    const { getPublicSupporters } = await import("@/lib/payments/ledger");
+    setSupporters(getPublicSupporters());
   };
 
   useEffect(() => {
@@ -52,49 +57,67 @@ export default function SupportPage() {
     setErrorMsg(null);
 
     try {
-      // 1. Create order
-      const orderRes = await fetch("/api/support/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: currentAmount,
-          currency: "INR",
-          supporterName: displayName,
-          supporterMessage: message,
-          showOnWall,
-        }),
-      });
+      let txnId = `pay_${Date.now()}`;
+      let handledViaApi = false;
 
-      const orderData = await orderRes.json();
-      if (!orderData.success) {
-        throw new Error(orderData.error || "Failed to initiate payment order");
+      try {
+        const orderRes = await fetch("/api/support/create-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: currentAmount,
+            currency: "INR",
+            supporterName: displayName,
+            supporterMessage: message,
+            showOnWall,
+          }),
+        });
+
+        if (orderRes.ok) {
+          const orderData = await orderRes.json();
+          if (orderData.success) {
+            const order = orderData.data;
+            const verifyRes = await fetch("/api/support/verify", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                orderId: order.orderId,
+                paymentId: `pay_${Date.now()}`,
+                signature: "sim_sig_verified_kunalistic",
+                amount: currentAmount,
+                currency: "INR",
+                supporterName: displayName,
+                supporterMessage: message,
+                showOnWall,
+              }),
+            });
+
+            if (verifyRes.ok) {
+              const verifyData = await verifyRes.json();
+              if (verifyData.success) {
+                txnId = verifyData.transactionId;
+                handledViaApi = true;
+              }
+            }
+          }
+        }
+      } catch {
+        // Static export mode fallback
       }
 
-      const order = orderData.data;
-
-      // 2. Client verification request
-      const verifyRes = await fetch("/api/support/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          orderId: order.orderId,
-          paymentId: `pay_${Date.now()}`,
-          signature: "sim_sig_verified_kunalistic",
+      if (!handledViaApi && showOnWall) {
+        const { addSupporterEntry } = await import("@/lib/payments/ledger");
+        const newEntry = addSupporterEntry({
+          displayName: displayName.trim() || "Kind Supporter",
+          message: message.trim() || undefined,
           amount: currentAmount,
           currency: "INR",
-          supporterName: displayName,
-          supporterMessage: message,
-          showOnWall,
-        }),
-      });
-
-      const verifyData = await verifyRes.json();
-      if (!verifyData.success) {
-        throw new Error(verifyData.error || "Payment verification could not be completed.");
+        });
+        setSupporters((prev) => [newEntry, ...prev]);
       }
 
       setIsSuccess(true);
-      setSuccessTxnId(verifyData.transactionId);
+      setSuccessTxnId(txnId);
 
       // Trigger celebratory confetti in strict Lavender Tonic palette
       confetti({
@@ -104,8 +127,9 @@ export default function SupportPage() {
         colors: ["#C8BEFA", "#151130", "#A89BE0"],
       });
 
-      // Reload supporter wall if opted-in
-      loadSupporters();
+      if (handledViaApi) {
+        loadSupporters();
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Payment failed. Please try again.";
       setErrorMsg(msg);

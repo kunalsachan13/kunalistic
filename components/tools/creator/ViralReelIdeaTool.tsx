@@ -38,10 +38,35 @@ export const ViralReelIdeaTool: React.FC = () => {
     setIsGenerating(true);
     setSavedStatus(false);
     try {
-      const res = await fetch("/api/ai/reel-ideas", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      let generatedIdeas: ViralReelIdea[] | null = null;
+      try {
+        const res = await fetch("/api/ai/reel-ideas", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            niche,
+            audience,
+            platform,
+            style,
+            goal,
+            tone,
+            topic,
+            variation,
+          }),
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && json.data) {
+            generatedIdeas = json.data;
+          }
+        }
+      } catch {
+        // In static export mode, gracefully fall back to local client generation
+      }
+
+      if (!generatedIdeas) {
+        const { generateLocalReelIdeas } = await import("@/lib/ai/heuristics");
+        generatedIdeas = generateLocalReelIdeas({
           niche,
           audience,
           platform,
@@ -50,13 +75,11 @@ export const ViralReelIdeaTool: React.FC = () => {
           tone,
           topic,
           variation,
-        }),
-      });
-      const json = await res.json();
-      if (json.success && json.data) {
-        setIdeas(json.data);
-        setSelectedIdeaIndex(0);
+        });
       }
+
+      setIdeas(generatedIdeas);
+      setSelectedIdeaIndex(0);
     } catch (err) {
       console.error(err);
     } finally {

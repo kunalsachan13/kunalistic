@@ -18,20 +18,39 @@ export const CaptionGeneratorTool: React.FC = () => {
   const handleGenerate = async () => {
     setIsGenerating(true);
     try {
-      const res = await fetch("/api/ai/captions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      let generatedCaption: CaptionOutput | null = null;
+      try {
+        const res = await fetch("/api/ai/captions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            topic,
+            tone,
+            platform,
+            includeEmojis,
+          }),
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && json.data) {
+            generatedCaption = json.data;
+          }
+        }
+      } catch {
+        // Fallback for static hosting
+      }
+
+      if (!generatedCaption) {
+        const { generateLocalCaption } = await import("@/lib/ai/heuristics");
+        generatedCaption = generateLocalCaption({
           topic,
           tone,
           platform,
           includeEmojis,
-        }),
-      });
-      const json = await res.json();
-      if (json.success && json.data) {
-        setResult(json.data);
+        });
       }
+
+      setResult(generatedCaption);
     } catch (err) {
       console.error(err);
     } finally {

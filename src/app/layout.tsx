@@ -21,10 +21,10 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL("https://kunalistic.com"),
   title: {
-    default: "Kunalistic — Bespoke Web Applications & Software Studio",
-    template: "%s | Kunalistic — Bespoke Software Labs",
+    default: "Kunalistic — Bespoke Software & 3D Motion Studio",
+    template: "%s | Kunalistic — 3D Motion & Software Labs",
   },
-  description: "Curated digital artifacts and bespoke web applications architected by Kunal. Explore live software showcases and commission tailored software MVPs.",
+  description: "Independent creative technology studio directed by Kunal. Architecting production web software, tactile 3D interactive experiences, and fluid motion graphics.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/manifest.webmanifest",
-  keywords: ["web applications", "kunal", "kunalistic", "software studio", "digital products", "custom development", "portfolio", "SaaS MVP"],
+  keywords: ["3D motion graphics", "web applications", "kunal", "kunalistic", "creative engineering", "digital products", "custom development", "SaaS MVP", "cinematic UI"],
   openGraph: {
-    title: "Kunalistic — Bespoke Software Labs",
-    description: "Curated digital artifacts and bespoke web applications architected by Kunal. Explore live software showcases and commission tailored software MVPs.",
+    title: "Kunalistic — Bespoke Software & 3D Motion Studio",
+    description: "Independent creative technology studio directed by Kunal. Architecting production web software, tactile 3D interactive experiences, and fluid motion graphics.",
     url: "https://kunalistic.com",
     siteName: "Kunalistic",
     images: [{ url: "/icon.png", width: 512, height: 512, alt: "Kunalistic Logo" }],
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kunalistic — Bespoke Software Labs",
-    description: "Curated digital artifacts and bespoke web applications architected by Kunal.",
+    title: "Kunalistic — Bespoke Software & 3D Motion Studio",
+    description: "Independent creative technology studio directed by Kunal. Architecting production web software, tactile 3D interactive experiences, and fluid motion graphics.",
     images: ["/icon.png"],
   },
   robots: {

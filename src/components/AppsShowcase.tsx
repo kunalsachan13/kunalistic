@@ -75,17 +75,17 @@ export default function AppsShowcase({ initialApps }: AppsShowcaseProps) {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header (Clean non-technical language) */}
+        {/* Section Header (Refined creative tech & motion tone) */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-white/[0.05] text-zinc-300 border border-white/10 mb-3">
-              <span>// CURATED REPOSITORY</span>
+              <span>// MOTION & CODE ARTIFACTS</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight" style={{ fontFamily: "var(--font-syne), sans-serif" }}>
-              Production Showcase.
+              Curated Production Showcase.
             </h2>
             <p className="text-zinc-400 text-sm sm:text-base mt-2.5 max-w-xl font-normal leading-relaxed">
-              Explore deployed applications crafted for utility, speed, and refined aesthetics. Launch live demos or inspect source code.
+              Explore live applications, interactive software, and motion designs architected for fluidity, uncompromising speed, and tactile aesthetics.
             </p>
           </div>
 

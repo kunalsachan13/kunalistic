@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 
 import { BudgetPreset, DEFAULT_SERVICE_TYPES } from '@/types';
+import { InstagramIcon, YoutubeIcon, MailIcon } from './Icons';
 
 const PROJECT_TYPES = DEFAULT_SERVICE_TYPES;
 
@@ -134,19 +135,50 @@ export default function RequestAppSection() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-medium bg-white/[0.04] text-zinc-300 border border-white/10 mb-3 shadow-sm">
-            <span>// COMMISSIONS & PARTNERSHIPS</span>
+            <span>// COMMISSIONS & CREATIVE DIRECTION</span>
           </div>
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.08]" style={{ fontFamily: "var(--font-syne), sans-serif" }}>
-            Commission A Custom App. <br />
+            Commission A Custom Project. <br />
             <span className="gradient-text-noir">
-              From Concept To Production.
+              From 3D Motion To Full-Stack Deployment.
             </span>
           </h2>
           <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-xl mx-auto font-normal leading-relaxed">
-            Direct collaboration with founder Kunal. Provide your project parameters below to receive a comprehensive architecture proposal, timeline estimate, and delivery roadmap.
+            Direct collaboration with founder Kunal. Provide your project parameters below or connect directly across channels to receive an architecture roadmap, motion scope, and delivery estimate.
           </p>
+
+          {/* Quick Direct Channel Buttons */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+            <a
+              href="https://www.instagram.com/kunalistic.io/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.09] border border-white/10 hover:border-white/20 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm"
+            >
+              <InstagramIcon className="w-3.5 h-3.5 text-zinc-400" />
+              <span>DM on Instagram</span>
+            </a>
+
+            <a
+              href="https://www.youtube.com/@KuNaListic"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.09] border border-white/10 hover:border-white/20 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm"
+            >
+              <YoutubeIcon className="w-3.5 h-3.5 text-zinc-400" />
+              <span>YouTube @KuNaListic</span>
+            </a>
+
+            <a
+              href="mailto:kunalsachan13@gmail.com"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.09] border border-white/10 hover:border-white/20 text-xs font-mono text-zinc-300 hover:text-white transition-all shadow-sm"
+            >
+              <MailIcon className="w-3.5 h-3.5 text-zinc-400" />
+              <span>kunalsachan13@gmail.com</span>
+            </a>
+          </div>
         </div>
 
         {/* Antigravity Floating Form Container */}

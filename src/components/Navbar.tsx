@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Shield } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { InstagramIcon, YoutubeIcon, MailIcon } from './Icons';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -54,7 +55,7 @@ export default function Navbar() {
                 KUNALISTIC
               </span>
               <span className="text-[10px] text-zinc-400 font-mono tracking-widest uppercase -mt-0.5">
-                Software Studio
+                Creative Tech & 3D Motion
               </span>
             </div>
           </Link>
@@ -65,22 +66,47 @@ export default function Navbar() {
               href="#showcase"
               className="px-4 py-1.5 rounded-full text-xs font-medium text-zinc-300 hover:text-white hover:bg-white/10 transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-white/30"
             >
-              Apps Showcase
+              Showcase
             </a>
 
             <a
               href="#request-app"
               className="px-4 py-1.5 rounded-full text-xs font-medium text-zinc-300 hover:text-white hover:bg-white/10 transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-white/30"
             >
-              Commission Project
+              Commission
             </a>
 
             <div className="mx-1 h-3.5 w-px bg-white/10" />
 
-            {/* Studio Availability Badge */}
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono text-zinc-300 bg-white/[0.04]">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-              <span>Available for Work</span>
+            {/* Quick Social Contact Links */}
+            <div className="flex items-center gap-1 px-1">
+              <a
+                href="https://www.instagram.com/kunalistic.io/"
+                target="_blank"
+                rel="noreferrer"
+                className="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
+                title="Instagram @kunalistic.io"
+              >
+                <InstagramIcon className="w-3.5 h-3.5" />
+              </a>
+
+              <a
+                href="https://www.youtube.com/@KuNaListic"
+                target="_blank"
+                rel="noreferrer"
+                className="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
+                title="YouTube @KuNaListic"
+              >
+                <YoutubeIcon className="w-3.5 h-3.5" />
+              </a>
+
+              <a
+                href="mailto:kunalsachan13@gmail.com"
+                className="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
+                title="Direct Email kunalsachan13@gmail.com"
+              >
+                <MailIcon className="w-3.5 h-3.5" />
+              </a>
             </div>
           </nav>
 
@@ -133,11 +159,34 @@ export default function Navbar() {
             >
               Commission Project
             </a>
-            <div className="pt-2 border-t border-white/10 flex items-center justify-center px-2 text-xs font-mono">
-              <span className="text-zinc-400 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-white" />
-                Available for Work
-              </span>
+            
+            {/* Mobile Socials */}
+            <div className="pt-3 border-t border-white/10 flex items-center justify-around px-2">
+              <a
+                href="https://www.instagram.com/kunalistic.io/"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono text-zinc-300 bg-white/5 hover:bg-white/10"
+              >
+                <InstagramIcon className="w-3.5 h-3.5" />
+                <span>Instagram</span>
+              </a>
+              <a
+                href="https://www.youtube.com/@KuNaListic"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono text-zinc-300 bg-white/5 hover:bg-white/10"
+              >
+                <YoutubeIcon className="w-3.5 h-3.5" />
+                <span>YouTube</span>
+              </a>
+              <a
+                href="mailto:kunalsachan13@gmail.com"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono text-zinc-300 bg-white/5 hover:bg-white/10"
+              >
+                <MailIcon className="w-3.5 h-3.5" />
+                <span>Mail</span>
+              </a>
             </div>
           </motion.div>
         )}

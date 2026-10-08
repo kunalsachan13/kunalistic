@@ -4,13 +4,13 @@ import React from 'react';
 import { Sparkles, Layers, ArrowUpRight, Compass, Shield, Check } from 'lucide-react';
 
 const TICKER_ITEMS = [
-  { text: 'BESPOKE WEB APPLICATIONS', tag: 'CRAFT' },
-  { text: 'DIGITAL PRODUCT DESIGN', tag: 'UX' },
-  { text: 'RAPID PROTOTYPING & MVPS', tag: 'VELOCITY' },
-  { text: 'HIGH-PERFORMANCE INTERFACES', tag: 'POLISH' },
+  { text: '3D ANIMATION & MOTION GRAPHICS', tag: 'CINEMATIC' },
+  { text: 'FULL-STACK WEB APPLICATIONS', tag: 'ENGINEER' },
+  { text: 'HYPER-FLUID INTERACTION DESIGN', tag: 'AESTHETIC' },
+  { text: 'BESPOKE SAAS MVPS & TOOLS', tag: 'VELOCITY' },
+  { text: 'CREATIVE CODE & VISUAL EFFECTS', tag: 'MOTION' },
   { text: 'TAILORED CLIENT COMMISSIONS', tag: 'STUDIO' },
-  { text: 'ARCHITECTURAL MINIMALISM', tag: 'NOIR' },
-  { text: 'IMMERSIVE EXPERIENCES', tag: 'LIVE' },
+  { text: 'HIGH-PERFORMANCE EDGE ARCHITECTURE', tag: 'SPEED' },
 ];
 
 export default function MarqueeTicker() {

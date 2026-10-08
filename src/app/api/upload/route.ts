@@ -44,9 +44,6 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
-    await mkdir(uploadsDir, { recursive: true });
-
     // Clean filename
     const sanitizedOriginal = file.name
       .toLowerCase()
@@ -55,15 +52,22 @@ export async function POST(request: NextRequest) {
     const ext = path.extname(sanitizedOriginal) || '.png';
     const baseName = path.basename(sanitizedOriginal, ext);
     const uniqueFilename = `thumb_${Date.now()}_${baseName}${ext}`;
-    const destinationPath = path.join(uploadsDir, uniqueFilename);
 
-    await writeFile(destinationPath, buffer);
+    let publicUrl = `/uploads/${uniqueFilename}`;
 
-    const publicUrl = `/uploads/${uniqueFilename}`;
+    try {
+      const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+      await mkdir(uploadsDir, { recursive: true });
+      const destinationPath = path.join(uploadsDir, uniqueFilename);
+      await writeFile(destinationPath, buffer);
+    } catch {
+      // Cloudflare Workers / Serverless edge environment with read-only disk
+      publicUrl = `data:${file.type || 'image/png'};base64,${buffer.toString('base64')}`;
+    }
 
     return NextResponse.json({
       success: true,
-      message: 'Thumbnail uploaded successfully',
+      message: 'Thumbnail processed successfully',
       url: publicUrl,
       filename: uniqueFilename,
       size: file.size,

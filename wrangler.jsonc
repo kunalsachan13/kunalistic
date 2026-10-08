@@ -1,0 +1,29 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "kunalistic",
+	"compatibility_date": "2026-10-02",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"services": [
+		{
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "kunalistic"
+		}
+	],
+	"images": {
+		"binding": "IMAGES"
+	},
+	"vars": {
+		"DATABASE_URL": "postgresql://neondb_owner:npg_LmcbnjUF1kZ5@ep-lingering-credit-b7lzuuvs-pooler.c-13.us-east-1.aws.neon.tech/neondb?sslmode=require",
+		"ADMIN_SECRET_KEY": "kunalistic-admin-2026",
+		"NEXT_PUBLIC_APP_NAME": "KuNaListic",
+		"NEXT_PUBLIC_APP_TAGLINE": "Where High-Impact Web Apps Come to Life"
+	}
+}

@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+:root {
+  --background: #08080a;
+  --foreground: #f4f4f6;
+  --surface-lowest: #050507;
+  --surface-low: #0c0c0e;
+  --surface-mid: #131316;
+  --surface-high: #1a1a1f;
+  --surface-highest: #26262c;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(255, 255, 255, 0.18);
+  --accent-white: #ffffff;
+  --accent-silver: #a1a1aa;
+  --accent-zinc: #71717a;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  selection-background-color: #ffffff;
+  selection-color: #000000;
+}
+
+/* Custom sleek monochrome scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08080a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* Antigravity Monochromatic Glassmorphism */
+.glass-panel {
+  background: rgba(18, 18, 22, 0.65);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-floating {
+  background: rgba(14, 14, 17, 0.78);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9),
+              0 0 40px -10px rgba(255, 255, 255, 0.04);
+}
+
+.glass-pill {
+  background: rgba(20, 20, 24, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Antigravity Multi-Tier Monochromatic Levitation Shadows */
+.shadow-levitate-sm {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7),
+              0 0 15px rgba(255, 255, 255, 0.03);
+}
+
+.shadow-levitate {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85),
+              0 0 30px rgba(255, 255, 255, 0.04);
+}
+
+.shadow-levitate-lg {
+  box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.95),
+              0 0 50px rgba(255, 255, 255, 0.06);
+}
+
+.shadow-glow-white {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+}
+
+.shadow-glow-silver {
+  box-shadow: 0 0 25px rgba(200, 200, 210, 0.15);
+}
+
+/* Smooth Deceleration Curve */
+.ease-antigravity {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 3D Perspective & Planar Layering */
+.perspective-container {
+  perspective: 1400px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Monochromatic Luxury Gradients */
+.gradient-text-clean {
+  background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 50%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-noir {
+  background: linear-gradient(180deg, #ffffff 0%, #d4d4d8 50%, #71717a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-silver {
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #52525b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Infinite Marquee */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Ambient Monochromatic Glows */
+.glow-ambient {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  opacity: 0.12;
+  z-index: 0;
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 0.08;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.16;
+    transform: scale(1.05);
+  }
+}
+
+.animate-glow-pulse {
+  animation: pulse-soft 6s ease-in-out infinite;
+}
